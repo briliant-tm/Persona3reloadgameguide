@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Sword } from "lucide-react";
-import { SectionTitle } from "./SectionTitle";
-import { Card } from "./Card";
+import { SectionTitle } from "../../components/SectionTitle";
+import { Card } from "../../components/Card";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
-import { ELEMENTS } from "../data/combat";
+import { ELEMENTS } from "../../lib/data/combat";
+import { useTheme } from "../../components/ThemeProvider";
 
 import image_21759f992f0d7304d758e12635af8d6d001286fa from 'figma:asset/21759f992f0d7304d758e12635af8d6d001286fa.png';
 import image_14eda866ffb7e5990bcfba528d31bd88361f1865 from 'figma:asset/14eda866ffb7e5990bcfba528d31bd88361f1865.png';
@@ -14,7 +15,8 @@ import image_a7d9cc459eb57d733c0b77ca6609a1e8546920d8 from 'figma:asset/a7d9cc45
 import image_9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae from 'figma:asset/9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae.png';
 import image_4cc4eb2aef625f2fec20aa33d9618624883d124b from 'figma:asset/4cc4eb2aef625f2fec20aa33d9618624883d124b.png';
 
-export const CombatGuide = ({ theme }) => {
+export default function CombatPage() {
+  const { theme } = useTheme();
   const [combatTab, setCombatTab] = useState("affinity");
   const [selectedElement, setSelectedElement] = useState(ELEMENTS[3]);
 
@@ -27,7 +29,7 @@ export const CombatGuide = ({ theme }) => {
 
   return (
     <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
-      <SectionTitle title="Combat Mechanics" subtitle="Master the Dark Hour." theme={theme} />
+      <SectionTitle title="Combat Mechanics" subtitle="Master the Dark Hour." />
 
       {/* Sub-navigation */}
       <div className="flex overflow-x-auto gap-4 mb-8 pb-2">
@@ -56,7 +58,7 @@ export const CombatGuide = ({ theme }) => {
               exit={{ opacity: 0, x: -20 }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8"
             >
-              <Card theme={theme} className="h-full">
+              <Card className="h-full">
                 <h3 className={`text-xl font-bold mb-6 flex items-center gap-2 ${theme === 'dark' ? "text-white" : "text-gray-900"}`}>
                   <Sword className={theme === 'dark' ? "text-[#51eefc]" : "text-[#1269cc]"} /> Elemental Chart
                 </h3>
@@ -80,7 +82,7 @@ export const CombatGuide = ({ theme }) => {
                 </div>
               </Card>
 
-              <Card theme={theme} className="flex flex-col justify-center">
+              <Card className="flex flex-col justify-center">
                  <div className="text-center mb-8">
                     <div className={`w-24 h-24 mx-auto rounded-full ${selectedElement.color} mb-6 shadow-[0_0_30px_currentColor] animate-pulse flex items-center justify-center text-white`}>
                        <selectedElement.icon size={48} strokeWidth={2} />

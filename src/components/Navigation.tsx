@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { Moon, Ghost, Sword, Map, BookOpen, GraduationCap, Menu, X, Sun } from "lucide-react";
 import logoImg from "figma:asset/1906305b5d234fcf82e6d60ae0d0632407c8e048.png";
+import { useTheme } from "./ThemeProvider";
 
-export const Navigation = ({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, theme, toggleTheme }) => {
+export const Navigation = () => {
+  const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navItems = [
-    { id: "home", label: "Home", icon: <Moon size={20} /> },
-    { id: "fusion", label: "Fusion", icon: <Ghost size={20} /> },
-    { id: "combat", label: "Combat", icon: <Sword size={20} /> },
-    { id: "floors", label: "Tartarus", icon: <Map size={20} /> },
-    { id: "story", label: "Story", icon: <BookOpen size={20} /> },
-    { id: "classroom", label: "Classroom", icon: <GraduationCap size={20} /> },
+    { id: "home", path: "/", label: "Home", icon: <Moon size={20} /> },
+    { id: "fusion", path: "/fusion", label: "Fusion", icon: <Ghost size={20} /> },
+    { id: "combat", path: "/combat", label: "Combat", icon: <Sword size={20} /> },
+    { id: "floors", path: "/floors", label: "Tartarus", icon: <Map size={20} /> },
+    { id: "story", path: "/story", label: "Story", icon: <BookOpen size={20} /> },
+    { id: "classroom", path: "/classroom", label: "Classroom", icon: <GraduationCap size={20} /> },
   ];
+
+  const getActiveTab = (pathname: string) => {
+    if (pathname === "/") return "home";
+    const found = navItems.find(item => item.path !== "/" && pathname.startsWith(item.path));
+    return found ? found.id : "home";
+  };
+
+  const activeTab = getActiveTab(location.pathname);
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b shadow-lg transition-colors duration-300 ${
@@ -21,21 +35,21 @@ export const Navigation = ({ activeTab, setActiveTab, mobileMenuOpen, setMobileM
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => setActiveTab("home")}>
+          <Link to="/" className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
             <div className={`h-8 flex items-center justify-center transition-colors`}>
                <img src={logoImg} alt="P3R Logo" className="h-full w-auto object-contain" />
             </div>
             <span className={`font-bold text-xl tracking-wider transition-colors ${theme === 'dark' ? "text-white" : "text-[#0a1929]"}`}>
               S.E.E.S. <span className="text-[#1269cc]">GUIDE</span>
             </span>
-          </div>
+          </Link>
           
           <div className="hidden md:flex items-center gap-4">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
+                  to={item.path}
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 flex items-center gap-2 group overflow-hidden ${
                     activeTab === item.id 
                       ? (theme === 'dark' ? "text-[#51eefc] bg-[#1269cc]/20" : "text-[#1269cc] bg-blue-50")
@@ -50,7 +64,7 @@ export const Navigation = ({ activeTab, setActiveTab, mobileMenuOpen, setMobileM
                       className={`absolute bottom-0 left-0 w-full h-0.5 ${theme === 'dark' ? "bg-[#51eefc]" : "bg-[#1269cc]"}`}
                     />
                   )}
-                </button>
+                </Link>
               ))}
             </div>
 
@@ -98,12 +112,10 @@ export const Navigation = ({ activeTab, setActiveTab, mobileMenuOpen, setMobileM
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => {
-                    setActiveTab(item.id);
-                    setMobileMenuOpen(false);
-                  }}
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`w-full text-left px-3 py-4 rounded-md text-base font-medium flex items-center gap-3 transition-colors ${
                     activeTab === item.id
                       ? (theme === 'dark' ? "text-[#51eefc] bg-[#1269cc]/20 border-l-4 border-[#51eefc]" : "text-[#1269cc] bg-blue-50 border-l-4 border-[#1269cc]")
@@ -112,7 +124,7 @@ export const Navigation = ({ activeTab, setActiveTab, mobileMenuOpen, setMobileM
                 >
                   {item.icon}
                   {item.label}
-                </button>
+                </Link>
               ))}
             </div>
           </motion.div>

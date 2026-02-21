@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
-import { SectionTitle } from "./SectionTitle";
-import { Card } from "./Card";
-import { PERSONAS } from "../data/personas";
+import { SectionTitle } from "../../components/SectionTitle";
+import { Card } from "../../components/Card";
+import { PERSONAS } from "../../lib/data/personas";
+import { useTheme } from "../../components/ThemeProvider";
 
-export const FusionGuide = ({ theme }) => {
+export default function FusionPage() {
+  const { theme } = useTheme();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   
@@ -17,7 +19,7 @@ export const FusionGuide = ({ theme }) => {
 
   return (
     <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
-      <SectionTitle title="Fusion Guide" subtitle="Search and filter Personas to find the perfect fusion combination." theme={theme} />
+      <SectionTitle title="Fusion Guide" subtitle="Search and filter Personas to find the perfect fusion combination." />
       
       <div className="flex flex-col md:flex-row gap-6 mb-8">
         <div className="relative flex-grow">
@@ -54,7 +56,7 @@ export const FusionGuide = ({ theme }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPersonas.map((persona, idx) => (
-          <Card key={persona.id} delay={idx * 0.1} theme={theme}>
+          <Card key={persona.id} delay={idx * 0.1}>
             <div className="flex justify-between items-start mb-4">
               <div>
                 <span className={`text-xs font-bold uppercase tracking-widest ${theme === 'dark' ? "text-[#51eefc]" : "text-[#1269cc]"}`}>{persona.arcana}</span>

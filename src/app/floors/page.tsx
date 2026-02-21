@@ -1,22 +1,25 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Sword } from "lucide-react";
-import { SectionTitle } from "./SectionTitle";
-import { Card } from "./Card";
+import { SectionTitle } from "../../components/SectionTitle";
+import { Card } from "../../components/Card";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
+import { useTheme } from "../../components/ThemeProvider";
+
 import image_761e4bc41e4797f2b059530040412c971cf21459 from 'figma:asset/761e4bc41e4797f2b059530040412c971cf21459.png';
 import image_14eda866ffb7e5990bcfba528d31bd88361f1865 from 'figma:asset/14eda866ffb7e5990bcfba528d31bd88361f1865.png';
 import image_2d883cecdcc329911bfbfd3c7d859a7b23353581 from 'figma:asset/2d883cecdcc329911bfbfd3c7d859a7b23353581.png';
 
-export const FloorGuide = ({ theme }) => {
+export default function FloorsPage() {
+  const { theme } = useTheme();
   return (
     <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
-      <SectionTitle title="Tartarus Blocks" subtitle="Explore the dark hour tower." theme={theme} />
+      <SectionTitle title="Tartarus Blocks" subtitle="Explore the dark hour tower." />
       
       <div className="space-y-16">
         {/* Thebel Block */}
         <div id="thebel" className="scroll-mt-24">
-          <Card theme={theme} className="p-0 overflow-hidden border-0 shadow-xl">
+          <Card className="p-0 overflow-hidden border-0 shadow-xl">
             <div className="relative h-64 md:h-80 w-full group">
                <ImageWithFallback 
                 src={image_761e4bc41e4797f2b059530040412c971cf21459}
@@ -117,7 +120,7 @@ export const FloorGuide = ({ theme }) => {
 
         {/* Arqa Block */}
         <div id="arqa" className="scroll-mt-24">
-          <Card theme={theme} className="p-0 overflow-hidden border-0 shadow-xl">
+          <Card className="p-0 overflow-hidden border-0 shadow-xl">
             <div className="relative h-64 md:h-80 w-full group">
                <ImageWithFallback 
                 src={image_14eda866ffb7e5990bcfba528d31bd88361f1865}
@@ -218,7 +221,7 @@ export const FloorGuide = ({ theme }) => {
 
         {/* Yabbashah Block */}
         <div id="yabbashah" className="scroll-mt-24">
-          <Card theme={theme} className="p-0 overflow-hidden border-0 shadow-xl">
+          <Card className="p-0 overflow-hidden border-0 shadow-xl">
             <div className="relative h-64 md:h-80 w-full group">
                <ImageWithFallback 
                 src={image_2d883cecdcc329911bfbfd3c7d859a7b23353581}

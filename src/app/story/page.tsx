@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { SectionTitle } from "./SectionTitle";
-import { STORY_STEPS } from "../data/story";
+import { SectionTitle } from "../../components/SectionTitle";
+import { STORY_STEPS } from "../../lib/data/story";
+import { useTheme } from "../../components/ThemeProvider";
 
-export const StoryGuide = ({ theme }) => {
+export default function StoryPage() {
+  const { theme } = useTheme();
   const [showSpoilers, setShowSpoilers] = useState(false);
 
   return (
     <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-        <SectionTitle title="Story Walkthrough" subtitle="Key events and timeline." theme={theme} />
+        <SectionTitle title="Story Walkthrough" subtitle="Key events and timeline." />
         <button
           onClick={() => setShowSpoilers(!showSpoilers)}
           className={`flex items-center gap-2 px-4 py-2 rounded border transition-all ${

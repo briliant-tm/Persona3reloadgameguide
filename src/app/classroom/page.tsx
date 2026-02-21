@@ -1,9 +1,11 @@
 import React from "react";
-import { SectionTitle } from "./SectionTitle";
+import { SectionTitle } from "../../components/SectionTitle";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
-import { CLASSROOM_SECTIONS } from "../data/classroom";
+import { CLASSROOM_SECTIONS } from "../../lib/data/classroom";
+import { useTheme } from "../../components/ThemeProvider";
 
-export const ClassroomGuide = ({ theme }) => {
+export default function ClassroomPage() {
+  const { theme } = useTheme();
   return (
     <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
       <div className={`absolute top-0 right-0 w-1/2 h-screen pointer-events-none transition-opacity ${theme === 'dark' ? "opacity-10" : "opacity-5"}`}>
@@ -15,7 +17,7 @@ export const ClassroomGuide = ({ theme }) => {
         <div className={`absolute inset-0 bg-gradient-to-l to-transparent ${theme === 'dark' ? "from-[#0a1929]" : "from-gray-50"}`} />
       </div>
 
-      <SectionTitle title="Classroom Answers" subtitle="Ace your exams and pop quizzes to boost your Academics." theme={theme} />
+      <SectionTitle title="Classroom Answers" subtitle="Ace your exams and pop quizzes to boost your Academics." />
       
       <div className="space-y-8 relative z-10">
         {CLASSROOM_SECTIONS.map((section, idx) => (
