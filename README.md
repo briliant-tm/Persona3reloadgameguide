@@ -1,5 +1,3 @@
-git clone https://github.com/yourusername/persona3-reload-guide.git
-
 # 🎭 LZ Corporation Ltd — Persona 3 Reload Game Guide
 
 > **Simplifying connectivity. Secure. Scalable. Modern.**
