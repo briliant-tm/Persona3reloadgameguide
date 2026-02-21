@@ -71,15 +71,20 @@ export default function FusionPage() {
           />
         </div>
         
-        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
+        <div className={`flex gap-2 overflow-x-auto pb-3 md:pb-0 rounded-lg px-2 ${
+          theme === 'dark' ? "bg-[#0f2438]/50 scrollbar-thin scrollbar-thumb-[#1269cc]/50 scrollbar-track-[#0a1929]/30" : "bg-gray-100 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+        }`} style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: theme === 'dark' ? 'rgba(18, 105, 204, 0.5) rgba(10, 25, 41, 0.3)' : 'rgb(209, 213, 219) rgb(245, 245, 245)'
+        }}>
           {arcanas.map(a => (
             <button
               key={a}
               onClick={() => setFilter(a)}
-              className={`px-4 py-2 whitespace-nowrap text-sm font-bold uppercase tracking-wider transition-all ${
+              className={`px-4 py-2 whitespace-nowrap text-sm font-bold uppercase tracking-wider transition-all rounded ${
                 filter === a 
-                  ? (theme === 'dark' ? "bg-[#51eefc] text-[#0a1929]" : "bg-[#1269cc] text-white")
-                  : (theme === 'dark' ? "bg-[#0f2438] text-gray-400 border border-[#1269cc]/30 hover:text-white" : "bg-white text-gray-600 border border-gray-300 hover:text-[#0a1929]")
+                  ? (theme === 'dark' ? "bg-[#51eefc] text-[#0a1929] shadow-[0_0_10px_rgba(81,238,252,0.3)]" : "bg-[#1269cc] text-white shadow-md")
+                  : (theme === 'dark' ? "bg-[#0f2438] text-gray-400 border border-[#1269cc]/30 hover:text-[#51eefc] hover:bg-[#1269cc]/10" : "bg-white text-gray-600 border border-gray-300 hover:text-[#1269cc] hover:bg-blue-50")
               }`}
             >
               {a}
