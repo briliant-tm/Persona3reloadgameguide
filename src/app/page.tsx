@@ -1,14 +1,8 @@
-import AIChat from "@/components/AIChat";
+'use client'; // Hero component uses Motion animations (client-side interactivity)
 
-export default function HomePage() {
-  return (
-    <main className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Persona 3 Reload Guide</h1>
-      {/* Integrasi fitur AI Chat ke dalam layout utama */}
-      <section className="max-w-md">
-        <AIChat />
-      </section>
-      {/* Konten lainnya */}
-    </main>
-  );
+import React from "react";
+import { Hero } from "../components/Hero";
+
+export default function Home() {
+  return <Hero />;
 }
