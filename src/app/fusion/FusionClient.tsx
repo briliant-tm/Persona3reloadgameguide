@@ -134,7 +134,7 @@ export default function FusionClient({ staticPersonas }: FusionClientProps) {
 
   return (
     <ErrorBoundary>
-      <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
+      <div className={`min-h-screen pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
         {/* SectionTitle is now rendered in the Server Component */}
         
         {/* Removed Error Display and Loading State components explicitly */}
