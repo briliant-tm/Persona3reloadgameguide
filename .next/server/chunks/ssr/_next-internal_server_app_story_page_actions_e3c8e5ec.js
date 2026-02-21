@@ -1,3 +1,0 @@
-module.exports=[3313,(a,b,c)=>{}];
-
-//# sourceMappingURL=_next-internal_server_app_story_page_actions_e3c8e5ec.js.map
