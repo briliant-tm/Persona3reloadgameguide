@@ -1,4 +1,4 @@
-# 🎭 LZ Corporation Ltd — Game Guide Template
+# 🎭 LZ Corporation Ltd — Persona 3 Reload Complete Guide
 
 > **Simplifying connectivity. Secure. Scalable. Modern.**
 
