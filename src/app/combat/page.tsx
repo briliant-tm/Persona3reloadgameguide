@@ -37,11 +37,9 @@ import { useTheme } from "../../components/ThemeProvider";
 
 import image_21759f992f0d7304d758e12635af8d6d001286fa from 'figma:asset/21759f992f0d7304d758e12635af8d6d001286fa.png';
 import image_14eda866ffb7e5990bcfba528d31bd88361f1865 from 'figma:asset/14eda866ffb7e5990bcfba528d31bd88361f1865.png';
-import image_3d7185e2cbdc628d96e6655b28438392f1dfd136 from 'figma:asset/3d7185e2cbdc628d96e6655b28438392f1dfd136.png';
 import image_2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa from 'figma:asset/2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa.png';
 import image_a7d9cc459eb57d733c0b77ca6609a1e8546920d8 from 'figma:asset/a7d9cc459eb57d733c0b77ca6609a1e8546920d8.png';
 import image_9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae from 'figma:asset/9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae.png';
-import image_4cc4eb2aef625f2fec20aa33d9618624883d124b from 'figma:asset/4cc4eb2aef625f2fec20aa33d9618624883d124b.png';
 
 export default function CombatPage() {
   const { theme } = useTheme();
@@ -270,14 +268,14 @@ export default function CombatPage() {
                       <div className="relative w-48 h-32">
                         {/* Enemy 1 (Left) */}
                         <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-20 h-20 rounded-full border-4 border-red-500 overflow-hidden bg-black z-10 shadow-lg shadow-red-500/40">
-                           <ImageWithFallback src={image_3d7185e2cbdc628d96e6655b28438392f1dfd136} alt="Enemy 1" className="w-full h-full object-cover opacity-75" />
+                           <div className="w-full h-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-bold">⚔️</div>
                            <div className="absolute inset-0 flex items-center justify-center">
                               <span className="font-black text-white bg-red-600 px-2 py-0.5 text-[10px] uppercase tracking-widest transform -rotate-12">Weak</span>
                            </div>
                         </div>
                         {/* Enemy 2 (Right) */}
                         <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-20 h-20 rounded-full border-4 border-red-500 overflow-hidden bg-black z-10 shadow-lg shadow-red-500/40">
-                           <ImageWithFallback src={image_3d7185e2cbdc628d96e6655b28438392f1dfd136} alt="Enemy 2" className="w-full h-full object-cover opacity-75 grayscale" />
+                           <div className="w-full h-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-bold opacity-75 grayscale">⚔️</div>
                            <div className="absolute inset-0 flex items-center justify-center">
                               <span className="font-black text-white bg-red-600 px-2 py-0.5 text-[10px] uppercase tracking-widest transform rotate-12">Weak</span>
                            </div>
@@ -318,12 +316,8 @@ export default function CombatPage() {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl group">
-                <ImageWithFallback 
-                  src={image_4cc4eb2aef625f2fec20aa33d9618624883d124b}
-                  alt="All Out Attack Concept"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+              <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl group bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900">
+                <div className="w-full h-full flex items-center justify-center text-white text-6xl font-black">🎯</div>
                 <div className={`absolute inset-0 bg-gradient-to-t ${theme === 'dark' ? "from-[#0a1929] via-[#0a1929]/60" : "from-white via-white/60"} to-transparent`} />
                 <div className="absolute inset-0 flex items-end p-8">
                   <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter transform -skew-x-12 origin-bottom-left" 
