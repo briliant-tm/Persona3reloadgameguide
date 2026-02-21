@@ -25,11 +25,12 @@ export function memoize<T extends (...args: any[]) => any>(
     cache.set(key, result);
 
     // Implement simple LRU-like cleanup if cache gets too large
-    if (cache.size > options.maxSize) {
-      const firstKey = cache.keys().next().value;
-      cache.delete(firstKey);
-    }
-
+          if (cache.size > options.maxSize) {
+            const firstKey = cache.keys().next().value;
+            if (firstKey !== undefined) {
+              cache.delete(firstKey);
+            }
+          }
     return result;
   }) as T;
 }

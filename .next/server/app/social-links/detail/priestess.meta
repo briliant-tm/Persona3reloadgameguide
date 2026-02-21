@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/social-links/layout,_N_T_/social-links/detail/layout,_N_T_/social-links/detail/[arcana]/layout,_N_T_/social-links/detail/[arcana]/page,_N_T_/social-links/detail/priestess"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/social-links/detail/$d$arcana/__PAGE__",
+    "/social-links/detail/$d$arcana",
+    "/social-links/detail",
+    "/social-links",
+    "/_index",
+    "/_head"
+  ]
+}

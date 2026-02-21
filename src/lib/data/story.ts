@@ -1,3 +1,10 @@
+export type StoryStep = {
+  date: string;
+  title: string;
+  content: string;
+  spoiler: boolean;
+};
+
 export const STORY_STEPS = [
   {
     date: "April 7, 2009",

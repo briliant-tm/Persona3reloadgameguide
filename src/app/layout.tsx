@@ -1,13 +1,16 @@
+"use client";
+import "../index.css";
+import "../styles/globals.css";
 import React from "react";
-import { Outlet, useLocation } from "react-router";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { ThemeProvider, useTheme } from "../components/ThemeProvider";
 
-const LayoutContent = () => {
+const LayoutContent = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useTheme();
-  const location = useLocation();
+  const pathname = usePathname();
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-300 ${
@@ -20,14 +23,14 @@ const LayoutContent = () => {
       <main className="min-h-screen flex flex-col">
         <AnimatePresence mode="wait">
           <motion.div
-            key={location.pathname}
+            key={pathname}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
             className="flex-grow"
           >
-            <Outlet />
+            {children}
           </motion.div>
         </AnimatePresence>
       </main>
@@ -37,10 +40,18 @@ const LayoutContent = () => {
   );
 };
 
-export default function Layout() {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <ThemeProvider>
-        <LayoutContent />
-    </ThemeProvider>
+    <html lang="en">
+      <body>
+        <ThemeProvider>
+          <LayoutContent>{children}</LayoutContent>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import heroBgImg from "figma:asset/8beeaae64ac691e9fefa73050b64b36b0316ba37.png";
+import heroBgImg from "../assets/8beeaae64ac691e9fefa73050b64b36b0316ba37.png";
 import { useTheme } from "./ThemeProvider";
 
 export const Hero = () => {
@@ -12,7 +12,7 @@ export const Hero = () => {
     <div className="relative overflow-hidden min-h-screen flex items-center">
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
-          src={heroBgImg}
+          src={heroBgImg.src}
           alt="Persona 3 Reload Hero"
           className={`w-full h-full object-cover transition-opacity duration-500 ${theme === 'dark' ? "opacity-60" : "opacity-30"}`}
         />
@@ -45,7 +45,7 @@ export const Hero = () => {
           </p>
           
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link to="/fusion">
+            <Link href="/fusion">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -60,7 +60,7 @@ export const Hero = () => {
               </motion.button>
             </Link>
             
-            <Link to="/classroom">
+            <Link href="/classroom">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

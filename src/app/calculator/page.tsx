@@ -1,52 +1,32 @@
+"use client";
 /**
  * ============================================================
- * RENDERING TECHNIQUE: Server-Side Rendering (SSR)
- * TRACKER TAG: [SSR-001-CALCULATOR]
- * INTERACTIVE: Client-Side Rendering (CSR) for calculations
+ * RENDERING TECHNIQUE: Client-Side Rendering (CSR)
+ * FRAMEWORK: Next.js App Router
  * ============================================================
  *
- * This page uses Server-Side Rendering (SSR) via `force-dynamic`.
- * It is rendered fresh on EVERY incoming request — no caching,
- * no static pre-rendering, no ISR revalidation window.
+ * This page is designated as a Client Component in Next.js
+ * through the `"use client";` directive.
  *
- * Configuration:
- *   export const dynamic = 'force-dynamic'
+ * 1.  **Initial Load:** The server sends a minimal HTML shell.
+ * 2.  **Hydration:** React and the component's JavaScript are
+ *     downloaded, and the component is fully rendered in the
+ *     browser, "hydrating" the static shell into an
+ *     interactive application.
+ * 3.  **Interactivity:** All calculations, state updates (e.g.,
+ *     selecting arcanas), and UI changes are handled entirely
+ *     on the client-side using React hooks like `useState` and
+ *     `useMemo`.
  *
- * Why SSR here?
- *   The Fusion Calculator accepts arbitrary user input (arcana
- *   pair selection) and computes results server-side. In a
- *   production scenario where the fusion table lives in a
- *   database (e.g., community-maintained with corrections and
- *   DLC additions), every request must fetch the latest data.
- *
- *   Additionally, SSR ensures search-engine crawlers receive
- *   fully rendered HTML for SEO, while the calculator UI
- *   hydrates for client-side interactivity.
- *
- * How it works in Next.js:
- *   1. User navigates to /calculator.
- *   2. Next.js server executes this component on every request.
- *   3. Data is fetched with `{ cache: 'no-store' }` — equivalent
- *      to `getServerSideProps` in the Pages Router.
- *   4. Fresh HTML is sent to the client and hydrated.
- *   5. No cached version is ever served — always up-to-date.
- *
- * Trade-offs vs SSG/ISR:
- *   + Always fresh data (no stale content risk)
- *   + Personalization-ready (can use cookies, headers, etc.)
- *   - Slower TTFB (server must render on every request)
- *   - Higher server cost (no CDN caching)
- *
- * Data fetching pattern (Next.js):
- *   const res = await fetch('https://api.example.com/fusion-table', {
- *     cache: 'no-store' // ← disables Next.js Data Cache
- *   });
+ * Why CSR?
+ *   - **High Interactivity:** The Fusion Calculator is a stateful
+ *     application with numerous user interactions that are best
+ *     handled in the browser.
+ *   - **No Dynamic Data:** The core data for fusion is static and
+ *     can be bundled with the client-side JavaScript. There's no
+ *     need to fetch data from a server on each request.
  * ============================================================
  */
-'use client'; // Required: useState, useMemo, AnimatePresence (client-side hooks)
-
-// Next.js Route Segment Config — forces server-side rendering on every request
-export const dynamic = 'force-dynamic';
 
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -260,7 +240,7 @@ export default function CalculatorPage() {
   const { theme } = useTheme();
   const [arcanaA, setArcanaA] = useState<Arcana | null>(null);
   const [arcanaB, setArcanaB] = useState<Arcana | null>(null);
-  const [activeTab, setActiveTab] = useState<"calculator" | "reverse">("calculator");
+  const [activeTab, setActiveTab] = useState<"calculator" | "reverse" | "mc-theurgy">("calculator");
   const [reverseTarget, setReverseTarget] = useState<Arcana | null>(null);
 
   // Forward fusion result

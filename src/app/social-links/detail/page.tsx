@@ -1,79 +1,34 @@
+"use client";
 /**
  * ============================================================
- * RENDERING TECHNIQUE: Incremental Static Regeneration (ISR)
- * TRACKER TAG: [ISR-001-SOCIAL-LINKS-DETAIL]
- * INTERACTIVE: Client-Side Rendering (CSR) for UI interactions
+ * RENDERING TECHNIQUE: Client-Side Rendering (CSR)
+ * FRAMEWORK: Next.js App Router
  * ============================================================
  *
- * This page uses ISR with a 60-second revalidation window.
- * It demonstrates the middle ground between SSG and SSR:
- * pages are pre-built at deploy time but automatically
- * regenerate in the background after the revalidation period.
+ * This page is a Client Component that dynamically renders the
+ * details of a specific Social Link based on the URL slug.
  *
- * Configuration:
- *   export const revalidate = 60  // seconds
+ * 1.  **Initial Load:** The server sends a minimal HTML shell.
+ * 2.  **Hydration & Data Fetching:** React and the component's
+ *     JavaScript are downloaded. The `useParams` hook from
+ *     `next/navigation` reads the slug from the URL. The
+ *     component then filters the static `SOCIAL_LINKS` data to
+ *     find the matching entry.
+ * 3.  **Rendering:** The component renders the details for the
+ *     found Social Link. All interactions, like expanding the
+ *     rank guide, are handled client-side.
  *
- * Why ISR here?
- *   A Social Link detail page is a good ISR candidate because:
- *   - The base data (game info) changes rarely → mostly static
- *   - Community-contributed tips/corrections could update → needs refresh
- *   - Individual pages are numerous (21 arcanas) → benefits from
- *     on-demand generation vs. pre-building everything
- *
- * How it works in Next.js:
- *   1. At build time, `generateStaticParams()` pre-renders pages
- *      for all known Social Link slugs (21 arcanas).
- *   2. The HTML is served from the CDN like SSG — instant loads.
- *   3. After 60 seconds, the NEXT request triggers a background
- *      regeneration. The stale page is served immediately.
- *   4. Once regeneration completes, the CDN cache is updated.
- *   5. All subsequent requests receive the fresh page.
- *
- * Stale-While-Revalidate pattern:
- *   Request 1 (t=0s)   → serves cached page
- *   Request 2 (t=30s)  → serves cached page (within window)
- *   Request 3 (t=61s)  → serves cached page + triggers regen
- *   Request 4 (t=62s+) → serves NEW page (regen complete)
- *
- * Data fetching pattern (Next.js):
- *   // In a Server Component, this would be:
- *   const res = await fetch(`https://api.example.com/social-links/${slug}`, {
- *     next: { revalidate: 60 } // ← ISR-specific cache directive
- *   });
- *
- * Companion: generateStaticParams()
- *   Pre-renders all known paths at build time so the first
- *   visitor doesn't trigger an on-demand render.
+ * Why CSR?
+ *   - **Dynamic Routes:** The content is determined by a dynamic
+ *     segment in the URL, which is accessed on the client.
+ *   - **Interactivity:** The page contains interactive elements
+ *     managed by `useState`.
  * ============================================================
  */
-'use client'; // Required: useParams, useState, useTheme (client-side hooks)
-
-// Next.js Route Segment Config — ISR with 60-second revalidation
-export const revalidate = 60;
-
-/**
- * generateStaticParams — Next.js App Router function
- *
- * In a real Next.js deployment, this function runs at build time
- * to tell Next.js which dynamic route segments to pre-render.
- * Each returned object maps to a URL like /social-links/detail?arcana=fool
- *
- * In this demo environment (react-router), it's exported for
- * reference but not automatically invoked.
- */
-export function generateStaticParams() {
-  // In Next.js, this would pre-render all 21 arcana detail pages at build time
-  const arcanas = [
-    "fool", "magician", "priestess", "empress", "emperor",
-    "hierophant", "lovers", "chariot", "justice", "hermit",
-    "fortune", "strength", "hanged-man", "death", "temperance",
-    "devil", "tower", "star", "moon", "sun", "judgement",
-  ];
-  return arcanas.map((arcana) => ({ arcana }));
-}
 
 import React, { useState, useMemo } from "react";
-import { useParams, Link } from "react-router";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
   ArrowLeft, MapPin, Clock, Unlock, Star, Heart,
@@ -105,29 +60,19 @@ const PRIORITY_STYLE: Record<string, { label: string; cls: string }> = {
   optional: { label: "Optional", cls: "bg-gray-500/20 text-gray-400 border-gray-500/40" },
 };
 
-/**
- * Simulated ISR data-fetching function.
- *
- * In a real Next.js Server Component, this would be:
- *   const link = await fetch(`/api/social-links/${slug}`, {
- *     next: { revalidate: 60 }
- *   }).then(r => r.json());
- *
- * Here, we resolve from static data to keep the demo functional.
- */
-function getSocialLinkBySlug(slug: string): SocialLink | undefined {
-  return SOCIAL_LINKS.find(
-    (l) => l.arcana.toLowerCase().replace(/\s+/g, "-") === slug
-  );
-}
-
 export default function SocialLinkDetailPage() {
   const { theme } = useTheme();
-  const { arcana } = useParams<{ arcana: string }>();
+  const params = useParams();
+  const arcana = params.arcana as string;
   const [showRankGuide, setShowRankGuide] = useState(false);
 
-  // ISR data resolution — in Next.js, this runs on the server
-  const link = useMemo(() => getSocialLinkBySlug(arcana || ""), [arcana]);
+  // Find the social link data on the client
+  const link = useMemo(() => {
+    if (!arcana) return undefined;
+    return SOCIAL_LINKS.find(
+      (l) => l.arcana.toLowerCase().replace(/\s+/g, "-") === arcana
+    );
+  }, [arcana]);
 
   // Related Personas for this arcana
   const relatedPersonas = useMemo(() => {
@@ -148,7 +93,7 @@ export default function SocialLinkDetailPage() {
           The arcana "{arcana}" doesn't match any Social Link.
         </p>
         <Link
-          to="/social-links"
+          href="/social-links"
           className={`flex items-center gap-2 px-5 py-3 rounded-lg font-bold transition-colors ${
             theme === "dark" ? "bg-[#1269cc] text-white hover:bg-[#1269cc]/80" : "bg-[#1269cc] text-white hover:bg-[#0f5ab5]"
           }`}
@@ -167,22 +112,13 @@ export default function SocialLinkDetailPage() {
       {/* Back nav */}
       <div className="mb-8">
         <Link
-          to="/social-links"
+          href="/social-links"
           className={`inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider transition-colors ${
             theme === "dark" ? "text-gray-400 hover:text-[#51eefc]" : "text-gray-500 hover:text-[#1269cc]"
           }`}
         >
           <ArrowLeft size={14} /> All Social Links
         </Link>
-      </div>
-
-      {/* ISR indicator — for academic presentation */}
-      <div className={`mb-6 p-3 rounded-lg border text-xs ${
-        theme === "dark" ? "bg-emerald-900/10 border-emerald-500/30 text-emerald-400" : "bg-emerald-50 border-emerald-200 text-emerald-700"
-      }`}>
-        <strong>ISR Demo:</strong> This page uses <code className="px-1 py-0.5 rounded bg-black/10">export const revalidate = 60</code>.
-        In Next.js, it would be statically generated at build time via <code className="px-1 py-0.5 rounded bg-black/10">generateStaticParams()</code>,
-        then regenerated in the background every 60 seconds after the first stale request.
       </div>
 
       {/* Hero Header */}

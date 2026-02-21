@@ -1,31 +1,32 @@
+"use client";
 /**
  * ============================================================
- * RENDERING TECHNIQUE: Static Site Generation (SSG)
- * TRACKER TAG: [SSG-002-COMBAT]
- * INTERACTIVE: Client-Side Rendering (CSR) for tab switching
+ * RENDERING TECHNIQUE: Client-Side Rendering (CSR)
+ * FRAMEWORK: Next.js App Router
  * ============================================================
  *
- * This page uses Static Rendering (SSG) via `force-static`.
- * The combat mechanics (elements, Theurgy, Shift, All-Out Attack)
- * are fixed game data that never changes at runtime.
+ * This page is designated as a Client Component in Next.js
+ * through the `"use client";` directive.
  *
- * Configuration:
- *   export const dynamic = 'force-static'
+ * 1.  **Initial Load:** A static shell of the page is sent to the
+ *     browser.
+ * 2.  **Hydration:** React and the component's JavaScript code
+ *     are downloaded, and the component becomes fully
+ *     interactive in the browser.
+ * 3.  **Interactivity:** All state changes, such as switching
+ *     between combat mechanic tabs (Affinity, Theurgy, etc.),
+ *     are handled entirely on the client-side using the
+ *     `useState` hook.
  *
- * Why SSG here?
- *   All combat data (9 element types, party member Theurgies,
- *   shift/all-out mechanics) is statically imported from
- *   `lib/data/combat.ts` and `lib/data/party.ts`. Since game
- *   mechanics don't change between deploys, SSG is optimal:
- *   - Pre-rendered once at build time
- *   - Served instantly from CDN edge
- *   - Zero runtime server cost
+ * Why CSR?
+ *   - **Rich User Interaction:** The page features multiple tabs
+ *     and interactive elements that require immediate feedback,
+ *     making it a natural fit for client-side state management.
+ *   - **Static Content:** The underlying data for combat mechanics
+ *     is static and can be bundled with the component, eliminating
+ *     the need for server-side data fetching on each request.
  * ============================================================
  */
-'use client'; // Required: useState, AnimatePresence (client-side hooks)
-
-// Next.js Route Segment Config — forces static generation at build time
-export const dynamic = 'force-static';
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -37,11 +38,11 @@ import { ELEMENTS } from "../../lib/data/combat";
 import { PARTY_MEMBERS } from "../../lib/data/party";
 import { useTheme } from "../../components/ThemeProvider";
 
-import image_21759f992f0d7304d758e12635af8d6d001286fa from 'figma:asset/21759f992f0d7304d758e12635af8d6d001286fa.png';
-import image_14eda866ffb7e5990bcfba528d31bd88361f1865 from 'figma:asset/14eda866ffb7e5990bcfba528d31bd88361f1865.png';
-import image_2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa from 'figma:asset/2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa.png';
-import image_a7d9cc459eb57d733c0b77ca6609a1e8546920d8 from 'figma:asset/a7d9cc459eb57d733c0b77ca6609a1e8546920d8.png';
-import image_9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae from 'figma:asset/9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae.png';
+import image_21759f992f0d7304d758e12635af8d6d001286fa from '../../assets/21759f992f0d7304d758e12635af8d6d001286fa.png';
+import image_14eda866ffb7e5990bcfba528d31bd88361f1865 from '../../assets/14eda866ffb7e5990bcfba528d31bd88361f1865.png';
+import image_2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa from '../../assets/2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa.png';
+import image_a7d9cc459eb57d733c0b77ca6609a1e8546920d8 from '../../assets/a7d9cc459eb57d733c0b77ca6609a1e8546920d8.png';
+import image_9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae from '../../assets/9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae.png';
 
 export default function CombatPage() {
   const { theme } = useTheme();
@@ -157,7 +158,7 @@ export default function CombatPage() {
               {/* Hero Banner */}
               <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl group">
                 <ImageWithFallback 
-                  src={image_21759f992f0d7304d758e12635af8d6d001286fa}
+                  src={image_21759f992f0d7304d758e12635af8d6d001286fa.src}
                   alt="Theurgy Concept"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -229,7 +230,7 @@ export default function CombatPage() {
             >
               <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-2xl group">
                 <ImageWithFallback 
-                  src={image_14eda866ffb7e5990bcfba528d31bd88361f1865}
+                  src={image_14eda866ffb7e5990bcfba528d31bd88361f1865.src}
                   alt="Shift Concept"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -288,22 +289,22 @@ export default function CombatPage() {
                    {/* Character Bubbles - Orbiting */}
                    {/* Char 1: Top Left */}
                    <div className="absolute top-[15%] left-[15%] w-16 h-16 rounded-full border-2 border-[#51eefc] overflow-hidden bg-gray-800 shadow-lg shadow-blue-500/30 z-20 transition-transform hover:scale-110">
-                      <ImageWithFallback src={image_2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa} alt="Character 1" className="w-full h-full object-cover" />
+                      <ImageWithFallback src={image_2b4ffce2d7c1faaaca2d9ef1198340d46e6258aa.src} alt="Character 1" className="w-full h-full object-cover" />
                    </div>
                    
                    {/* Char 2: Top Right */}
                    <div className="absolute top-[15%] right-[15%] w-16 h-16 rounded-full border-2 border-[#51eefc] overflow-hidden bg-gray-800 shadow-lg shadow-blue-500/30 z-20 transition-transform hover:scale-110">
-                      <ImageWithFallback src={image_a7d9cc459eb57d733c0b77ca6609a1e8546920d8} alt="Character 2" className="w-full h-full object-cover" />
+                      <ImageWithFallback src={image_a7d9cc459eb57d733c0b77ca6609a1e8546920d8.src} alt="Character 2" className="w-full h-full object-cover" />
                    </div>
 
                    {/* Char 3: Bottom Right */}
                    <div className="absolute bottom-[15%] right-[15%] w-16 h-16 rounded-full border-2 border-[#51eefc] overflow-hidden bg-gray-800 shadow-lg shadow-blue-500/30 z-20 transition-transform hover:scale-110">
-                      <ImageWithFallback src={image_9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae} alt="Character 3" className="w-full h-full object-cover" />
+                      <ImageWithFallback src={image_9f58ec1c5dd7788c0dbb715bfb864ad7e4a775ae.src} alt="Character 3" className="w-full h-full object-cover" />
                    </div>
 
                    {/* Char 4: Bottom Left */}
                    <div className="absolute bottom-[15%] left-[15%] w-16 h-16 rounded-full border-2 border-[#51eefc] overflow-hidden bg-gray-800 shadow-lg shadow-blue-500/30 z-20 transition-transform hover:scale-110">
-                      <ImageWithFallback src={image_21759f992f0d7304d758e12635af8d6d001286fa} alt="Character 4" className="w-full h-full object-cover" />
+                      <ImageWithFallback src={image_21759f992f0d7304d758e12635af8d6d001286fa.src} alt="Character 4" className="w-full h-full object-cover" />
                    </div>
                 </div>
               </div>

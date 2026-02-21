@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fsocial-links\u002Fdetail\u002F[arcana]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

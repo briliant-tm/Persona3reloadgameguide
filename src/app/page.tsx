@@ -1,31 +1,29 @@
 /**
  * ============================================================
- * RENDERING TECHNIQUE: Static Site Generation (SSG)
+ * RENDERING TECHNIQUE: Client-Side Rendering (CSR)
+ * FRAMEWORK: Next.js App Router
  * ============================================================
  *
- * This page uses Static Rendering — the default and fastest
- * strategy in Next.js App Router. The HTML is generated once at
- * build time and served from the CDN on every request.
+ * This page uses Client-Side Rendering (CSR) because it imports
+ * the `Hero` component, which is a client component that
+ * contains interactive elements and animations.
  *
- * Configuration:
- *   export const dynamic = 'force-static'
+ * 1.  **Initial Load:** The server sends a minimal HTML shell.
+ * 2.  **Hydration:** React and the `Hero` component's JavaScript
+ *     are downloaded, making the page fully interactive.
+ * 3.  **Interactivity:** All animations and client-side logic
+ *     within the `Hero` component execute in the browser.
  *
- * Why SSG here?
- *   The Home / Hero page contains only static marketing content
- *   (title, tagline, navigation links). There is zero dynamic or
- *   user-specific data, so pre-rendering at build time gives the
- *   best Time-to-First-Byte (TTFB) and Core Web Vitals scores.
- *
- * How it works in Next.js:
- *   1. `next build` renders this component to HTML at build time.
- *   2. The resulting HTML + JS bundle is uploaded to the CDN.
- *   3. Every visitor receives the same cached HTML instantly.
- *   4. No server-side execution happens per request.
+ * Why CSR here?
+ *   - **Animations and Interactivity:** The `Hero` component
+ *     features motion animations and interactive elements best
+ *     handled client-side.
+ *   - **Simplified Data:** This page itself doesn't require
+ *     dynamic data fetching, but its interactive child component
+ *     necessitates CSR.
  * ============================================================
  */
 'use client'; // Hero component uses Motion animations (client-side interactivity)
-
-export const dynamic = 'force-static'; // Next.js Route Segment Config — forces static generation
 
 import React from "react";
 import { Hero } from "../components/Hero";
