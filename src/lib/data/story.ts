@@ -1,44 +1,92 @@
 export const STORY_STEPS = [
   {
-    date: "April 2009",
-    title: "Arrival",
-    content: "The protagonist arrives in Iwatodai City and moves into the dorm. The first encounter with the Dark Hour happens.",
+    date: "April 7, 2009",
+    title: "Arrival at the Dorm",
+    content: "The protagonist transfers to Gekkoukan High and moves into a co-ed dormitory. During his first midnight, he experiences the Dark Hour — a hidden 25th hour when most people transmogrify into coffins and Shadows roam freely.",
     spoiler: false
   },
   {
-    date: "May 2009",
-    title: "First Full Moon",
-    content: "The first major shadow operation. The team begins to form and explore Tartarus.",
+    date: "April 9, 2009",
+    title: "Awakening — The Magician",
+    content: "A massive Shadow attacks the dorm. The protagonist awakens his Persona, Orpheus, by firing an Evoker. During the summoning, Thanatos briefly emerges. S.E.E.S. defeats the Arcana Magician on the dorm rooftop. Tartarus is revealed as Gekkoukan High's midnight transformation.",
     spoiler: false
   },
   {
-    date: "June 2009",
-    title: "Rescue Mission",
-    content: "Fuuka Yamagishi goes missing in Tartarus. The team must rescue her before the full moon.",
+    date: "May 9, 2009",
+    title: "Full Moon — The Priestess",
+    content: "S.E.E.S. encounters the first full-moon Shadow operation on the monorail. The Arcana Priestess attacks Yukari while the team fights through a moving train. First proper full-moon boss fight.",
     spoiler: false
   },
   {
-    date: "July 2009",
+    date: "June 8, 2009",
+    title: "Full Moon — The Hierophant & Lovers",
+    content: "Fuuka Yamagishi has been trapped in Tartarus for days. S.E.E.S. enters to rescue her, and Fuuka awakens her Persona Lucia during the operation. She becomes the team's navigator, replacing Mitsuru in that role. Two Arcana Shadows appear: Hierophant and Lovers.",
+    spoiler: false
+  },
+  {
+    date: "July 7, 2009",
+    title: "Full Moon — The Chariot & Justice",
+    content: "Two more Arcana Shadows appear during the Dark Hour. S.E.E.S. faces the Chariot and Justice simultaneously. The team's bonds grow stronger through the ordeal.",
+    spoiler: false
+  },
+  {
+    date: "July 20-21, 2009",
     title: "Yakushima Trip",
-    content: "The group takes a trip to Yakushima. Aigis is introduced.",
+    content: "The group travels to Yakushima at Mitsuru's father's invitation. They learn more about the Kirijo Group's connection to the Dark Hour and the Shadow experiments. Aigis, an anti-Shadow weapon, is introduced and becomes fixated on the protagonist.",
+    spoiler: false
+  },
+  {
+    date: "August 6, 2009",
+    title: "Full Moon — The Hermit",
+    content: "An Arcana Shadow infiltrates the school's network through an online game called \"Innocent Sin Online\". S.E.E.S. must dive into the virtual world to confront the Hermit Shadow.",
+    spoiler: false
+  },
+  {
+    date: "September 5, 2009",
+    title: "Full Moon — Fortune & Strength",
+    content: "Two Arcana Shadows attack during a typhoon. Shinjiro Aragaki officially returns to S.E.E.S. to aid in the battle. The team contends with the Fortune and Strength Shadows simultaneously.",
     spoiler: false
   },
   {
     date: "October 4, 2009",
-    title: "Tragedy",
-    content: "Shinjiro Aragaki is killed by Takaya of Strega.",
+    title: "Tragedy — The Hanged Man",
+    content: "Shinjiro Aragaki is shot by Takaya of Strega while protecting Ken Amada. Ken, who had sought revenge for his mother's death (caused accidentally by Shinjiro's Persona), ultimately chooses not to go through with his plan — but Takaya intervenes. Shinjiro dies, and the team is devastated.",
+    spoiler: true
+  },
+  {
+    date: "November 3, 2009",
+    title: "Full Moon — The Hanged Man (Reprise)",
+    content: "The Arcana Hanged Man Shadow appears during the Dark Hour. Despite the lingering grief from Shinjiro's loss, S.E.E.S. pushes forward. Strega becomes more aggressive in their interference.",
+    spoiler: false
+  },
+  {
+    date: "November 22, 2009",
+    title: "Truth About the Dark Hour",
+    content: "Mitsuru's father, Takeharu Kirijo, reveals the full truth about the Kirijo Group's experiments that caused the Dark Hour. Ikutsuki, the team's advisor, reveals his true allegiance and attempts to sacrifice the team. Takeharu Kirijo is killed. Aigis breaks free and saves the team.",
+    spoiler: true
+  },
+  {
+    date: "December 2, 2009",
+    title: "Ryoji Mochizuki's Revelation",
+    content: "The transfer student Ryoji Mochizuki reveals himself as Pharos / the Appraiser — a manifestation of Death. He explains that Nyx, the harbinger of the Fall, will descend on January 31 and end all life. He offers S.E.E.S. a choice.",
     spoiler: true
   },
   {
     date: "December 31, 2009",
     title: "The Choice",
-    content: "Ryoji presents the protagonist with a choice: kill him and forget everything, or let him live and face Nyx.",
+    content: "Ryoji presents the protagonist with a fateful decision: kill him to erase all memories of the Dark Hour and live in blissful ignorance until the Fall, or let him live and retain the will to fight Nyx — even if victory seems impossible. S.E.E.S. chooses to fight.",
+    spoiler: true
+  },
+  {
+    date: "January 31, 2010",
+    title: "The Battle Against Nyx",
+    content: "S.E.E.S. climbs to the top of Tartarus to face Nyx Avatar. The final battle spans all Arcana phases. After an exhausting fight, the protagonist channels the bonds of all Social Links to create the Great Seal, sacrificing his life force to prevent Nyx from being summoned by Erebus.",
     spoiler: true
   },
   {
     date: "March 5, 2010",
-    title: "Promised Day",
-    content: "The final battle against Nyx Avatar.",
+    title: "The Promised Day — Graduation",
+    content: "Graduation Day at Gekkoukan High. The team has lost their memories of the Dark Hour, but slowly they begin to remember their promise to meet on the school rooftop. One by one they arrive. The protagonist, having used his remaining life to maintain the Great Seal, passes away peacefully in Aigis's arms, smiling.",
     spoiler: true
   }
 ];

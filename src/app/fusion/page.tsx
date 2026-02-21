@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Search } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { Search, Shield, Sparkles } from "lucide-react";
 import { SectionTitle } from "../../components/SectionTitle";
 import { Card } from "../../components/Card";
 import { PERSONAS } from "../../lib/data/personas";
@@ -10,12 +10,18 @@ export default function FusionPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   
-  const filteredPersonas = PERSONAS.filter(p => 
-    (filter === "All" || p.arcana === filter) &&
-    p.name.toLowerCase().includes(search.toLowerCase())
+  const filteredPersonas = useMemo(() => 
+    PERSONAS.filter(p => 
+      (filter === "All" || p.arcana === filter) &&
+      p.name.toLowerCase().includes(search.toLowerCase())
+    ),
+    [filter, search]
   );
 
-  const arcanas = ["All", ...new Set(PERSONAS.map(p => p.arcana))];
+  const arcanas = useMemo(() => 
+    ["All", ...new Set(PERSONAS.map(p => p.arcana))],
+    []
+  );
 
   return (
     <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors ${theme === 'dark' ? "bg-[#0a1929]" : "bg-gray-50"}`}>
@@ -54,9 +60,13 @@ export default function FusionPage() {
         </div>
       </div>
 
+      <p className={`text-sm mb-4 ${theme === 'dark' ? "text-gray-500" : "text-gray-400"}`}>
+        Showing {filteredPersonas.length} of {PERSONAS.length} Personas
+      </p>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPersonas.map((persona, idx) => (
-          <Card key={persona.id} delay={idx * 0.1}>
+          <Card key={persona.id} delay={Math.min(idx * 0.05, 0.5)}>
             <div className="flex justify-between items-start mb-4">
               <div>
                 <span className={`text-xs font-bold uppercase tracking-widest ${theme === 'dark' ? "text-[#51eefc]" : "text-[#1269cc]"}`}>{persona.arcana}</span>
@@ -71,21 +81,69 @@ export default function FusionPage() {
             
             <div className="space-y-3">
               <div className={`flex items-center justify-between p-2 rounded ${theme === 'dark' ? "bg-[#0a1929]/50" : "bg-gray-100"}`}>
-                <span className="text-gray-400 text-sm">Type</span>
+                <span className="text-gray-400 text-sm">Affinity</span>
                 <span className={`font-medium ${theme === 'dark' ? "text-white" : "text-gray-900"}`}>{persona.type}</span>
               </div>
+
               <div className={`flex items-center justify-between p-2 rounded border-l-2 border-red-500 ${theme === 'dark' ? "bg-[#0a1929]/50" : "bg-gray-100"}`}>
                 <span className="text-gray-400 text-sm">Weakness</span>
-                <div className="flex gap-1">
-                  {persona.weak.map(w => (
-                    <span key={w} className="text-red-400 text-xs font-bold uppercase bg-red-900/20 px-1 py-0.5 rounded">{w}</span>
-                  ))}
+                <div className="flex gap-1 flex-wrap justify-end">
+                  {persona.weak.length > 0 ? persona.weak.map(w => (
+                    <span key={w} className="text-red-400 text-xs font-bold uppercase bg-red-900/20 px-1.5 py-0.5 rounded">{w}</span>
+                  )) : (
+                    <span className="text-green-400 text-xs font-bold uppercase bg-green-900/20 px-1.5 py-0.5 rounded">None</span>
+                  )}
                 </div>
               </div>
+
+              {persona.null && persona.null.length > 0 && (
+                <div className={`flex items-center justify-between p-2 rounded border-l-2 border-blue-500 ${theme === 'dark' ? "bg-[#0a1929]/50" : "bg-gray-100"}`}>
+                  <span className="text-gray-400 text-sm flex items-center gap-1">
+                    <Shield size={12} /> Null
+                  </span>
+                  <div className="flex gap-1 flex-wrap justify-end">
+                    {persona.null.map(n => (
+                      <span key={n} className="text-blue-400 text-xs font-bold uppercase bg-blue-900/20 px-1.5 py-0.5 rounded">{n}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {persona.skills && persona.skills.length > 0 && (
+                <div className={`p-2 rounded ${theme === 'dark' ? "bg-[#0a1929]/50" : "bg-gray-100"}`}>
+                  <span className="text-gray-400 text-sm flex items-center gap-1 mb-2">
+                    <Sparkles size={12} /> Key Skills
+                  </span>
+                  <div className="flex gap-1.5 flex-wrap">
+                    {persona.skills.map(s => (
+                      <span key={s} className={`text-xs px-1.5 py-0.5 rounded border ${
+                        theme === 'dark' 
+                          ? "border-[#1269cc]/30 text-gray-300 bg-[#1269cc]/10" 
+                          : "border-gray-200 text-gray-700 bg-white"
+                      }`}>{s}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </Card>
         ))}
       </div>
+
+      {filteredPersonas.length === 0 && (
+        <div className={`text-center py-20 ${theme === 'dark' ? "text-gray-500" : "text-gray-400"}`}>
+          <Search size={48} className="mx-auto mb-4 opacity-30" />
+          <p className="text-lg">No Personas found matching your search.</p>
+          <button
+            onClick={() => { setSearch(""); setFilter("All"); }}
+            className={`mt-4 px-4 py-2 rounded transition-colors ${
+              theme === 'dark' ? "bg-[#1269cc]/20 text-[#51eefc] hover:bg-[#1269cc]/30" : "bg-blue-50 text-[#1269cc] hover:bg-blue-100"
+            }`}
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
     </div>
   );
 };

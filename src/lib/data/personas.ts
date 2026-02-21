@@ -1,82 +1,697 @@
-export const PERSONAS = [
+export interface Persona {
+  id: number;
+  name: string;
+  arcana: string;
+  level: number;
+  type: string;
+  weak: string[];
+  null?: string[];
+  skills?: string[];
+}
+
+export const PERSONAS: Persona[] = [
+  // --- Fool ---
   {
     id: 1,
     name: "Orpheus",
     arcana: "Fool",
     level: 1,
     type: "Fire",
-    weak: ["Elec", "Dark"]
+    weak: ["Elec", "Dark"],
+    skills: ["Agi", "Bash", "Tarunda"]
   },
   {
     id: 2,
-    name: "Pixie",
-    arcana: "Lovers",
-    level: 2,
-    type: "Elec",
-    weak: ["Ice", "Wind"]
+    name: "Orpheus Telos",
+    arcana: "Fool",
+    level: 90,
+    type: "Almighty",
+    weak: [],
+    null: ["Fire", "Ice", "Elec", "Wind", "Light", "Dark"],
+    skills: ["Victory Cry", "Spell Master", "Almighty Boost"]
   },
   {
     id: 3,
-    name: "Apsaras",
-    arcana: "Priestess",
-    level: 3,
-    type: "Ice",
-    weak: ["Fire"]
+    name: "Legion",
+    arcana: "Fool",
+    level: 22,
+    type: "Dark",
+    weak: ["Light"],
+    skills: ["Mudo", "Poison Mist", "Evil Touch"]
   },
   {
     id: 4,
-    name: "Angel",
-    arcana: "Justice",
-    level: 4,
-    type: "Wind",
-    weak: ["Dark"]
+    name: "Black Frost",
+    arcana: "Fool",
+    level: 34,
+    type: "Ice",
+    weak: [],
+    null: ["Fire", "Ice", "Dark"],
+    skills: ["Bufula", "Agidyne", "Ice Break"]
   },
   {
     id: 5,
+    name: "Loki",
+    arcana: "Fool",
+    level: 58,
+    type: "Ice",
+    weak: ["Fire"],
+    null: ["Ice"],
+    skills: ["Bufudyne", "Mabufudyne", "Ice Amp"]
+  },
+  {
+    id: 6,
+    name: "Susano-o",
+    arcana: "Fool",
+    level: 76,
+    type: "Wind",
+    weak: [],
+    null: ["Wind"],
+    skills: ["Garudyne", "Magarudyne", "Brave Blade"]
+  },
+
+  // --- Magician ---
+  {
+    id: 7,
+    name: "Hermes",
+    arcana: "Magician",
+    level: 6,
+    type: "Fire",
+    weak: ["Ice"],
+    skills: ["Agi", "Cleave"]
+  },
+  {
+    id: 8,
     name: "Jack Frost",
     arcana: "Magician",
     level: 8,
     type: "Ice",
-    weak: ["Fire"]
+    weak: ["Fire"],
+    skills: ["Bufu", "Mabufu", "Ice Break"]
   },
-   {
-    id: 6,
+  {
+    id: 9,
     name: "Pyro Jack",
     arcana: "Magician",
     level: 14,
     type: "Fire",
-    weak: ["Ice"]
+    weak: ["Ice", "Wind"],
+    null: ["Fire"],
+    skills: ["Agilao", "Maragi", "Rakunda"]
   },
   {
-    id: 7,
+    id: 10,
+    name: "Hua Po",
+    arcana: "Magician",
+    level: 5,
+    type: "Fire",
+    weak: ["Ice"],
+    null: ["Fire"],
+    skills: ["Agi", "Dia"]
+  },
+  {
+    id: 11,
+    name: "Surt",
+    arcana: "Magician",
+    level: 52,
+    type: "Fire",
+    weak: ["Ice"],
+    null: ["Fire"],
+    skills: ["Agidyne", "Maragidyne", "Fire Amp"]
+  },
+
+  // --- Priestess ---
+  {
+    id: 12,
+    name: "Apsaras",
+    arcana: "Priestess",
+    level: 3,
+    type: "Ice",
+    weak: ["Fire", "Elec"],
+    skills: ["Bufu", "Dia", "Patra"]
+  },
+  {
+    id: 13,
+    name: "Unicorn",
+    arcana: "Priestess",
+    level: 11,
+    type: "Light",
+    weak: ["Dark"],
+    skills: ["Kouha", "Dia", "Patra"]
+  },
+  {
+    id: 14,
+    name: "Sarasvati",
+    arcana: "Priestess",
+    level: 27,
+    type: "Ice",
+    weak: ["Fire", "Elec"],
+    null: ["Ice"],
+    skills: ["Bufula", "Mediarama", "Dekaja"]
+  },
+  {
+    id: 15,
+    name: "Scathach",
+    arcana: "Priestess",
+    level: 49,
+    type: "Wind",
+    weak: ["Fire"],
+    null: ["Wind", "Ice"],
+    skills: ["Magarula", "Mabufula", "Wind Amp"]
+  },
+
+  // --- Empress ---
+  {
+    id: 16,
+    name: "Leanan Sidhe",
+    arcana: "Empress",
+    level: 19,
+    type: "Ice",
+    weak: ["Wind"],
+    null: ["Ice"],
+    skills: ["Bufula", "Marin Karin", "Media"]
+  },
+  {
+    id: 17,
+    name: "Titania",
+    arcana: "Empress",
+    level: 33,
+    type: "Elec",
+    weak: ["Wind"],
+    null: ["Elec"],
+    skills: ["Zionga", "Mediarama", "Dekunda"]
+  },
+  {
+    id: 18,
+    name: "Alilat",
+    arcana: "Empress",
+    level: 74,
+    type: "Ice",
+    weak: ["Fire"],
+    null: ["Ice", "Light", "Dark"],
+    skills: ["Mabufudyne", "Marakukaja", "Repel Phys"]
+  },
+
+  // --- Emperor ---
+  {
+    id: 19,
     name: "Oberon",
     arcana: "Emperor",
     level: 15,
     type: "Elec",
-    weak: ["Wind"]
+    weak: ["Dark"],
+    null: ["Elec"],
+    skills: ["Zio", "Zionga", "Tarukaja"]
   },
   {
-    id: 8,
+    id: 20,
+    name: "King Frost",
+    arcana: "Emperor",
+    level: 22,
+    type: "Ice",
+    weak: ["Fire"],
+    null: ["Ice"],
+    skills: ["Bufula", "Mabufula", "Ice Boost"]
+  },
+  {
+    id: 21,
+    name: "Odin",
+    arcana: "Emperor",
+    level: 57,
+    type: "Elec",
+    weak: ["Wind"],
+    null: ["Elec", "Light"],
+    skills: ["Ziodyne", "Maziodyne", "Thunder Reign"]
+  },
+
+  // --- Hierophant ---
+  {
+    id: 22,
+    name: "Omoikane",
+    arcana: "Hierophant",
+    level: 7,
+    type: "Elec",
+    weak: ["Wind"],
+    skills: ["Zio", "Tarunda", "Sukunda"]
+  },
+  {
+    id: 23,
+    name: "Shiisaa",
+    arcana: "Hierophant",
+    level: 20,
+    type: "Elec",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Zionga", "Hamaon", "Dodge Dark"]
+  },
+  {
+    id: 24,
+    name: "Daisoujou",
+    arcana: "Hierophant",
+    level: 41,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hamaon", "Mahamaon", "Samsara"]
+  },
+
+  // --- Lovers ---
+  {
+    id: 25,
+    name: "Pixie",
+    arcana: "Lovers",
+    level: 2,
+    type: "Elec",
+    weak: ["Ice", "Dark"],
+    skills: ["Zio", "Dia", "Patra"]
+  },
+  {
+    id: 26,
+    name: "Alp",
+    arcana: "Lovers",
+    level: 13,
+    type: "Wind",
+    weak: ["Elec"],
+    null: ["Wind"],
+    skills: ["Garula", "Dormina", "Marin Karin"]
+  },
+  {
+    id: 27,
+    name: "Raphael",
+    arcana: "Lovers",
+    level: 67,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hamaon", "Brave Blade", "God's Hand"]
+  },
+
+  // --- Chariot ---
+  {
+    id: 28,
+    name: "Ara Mitama",
+    arcana: "Chariot",
+    level: 6,
+    type: "Fire",
+    weak: ["Ice"],
+    skills: ["Agi", "Bash", "Tarukaja"]
+  },
+  {
+    id: 29,
+    name: "Zouchouten",
+    arcana: "Chariot",
+    level: 18,
+    type: "Elec",
+    weak: ["Wind"],
+    null: ["Elec"],
+    skills: ["Zionga", "Kill Rush", "Elec Boost"]
+  },
+  {
+    id: 30,
+    name: "Thor",
+    arcana: "Chariot",
+    level: 53,
+    type: "Elec",
+    weak: ["Wind"],
+    null: ["Elec", "Light"],
+    skills: ["Ziodyne", "Maziodyne", "Elec Amp"]
+  },
+
+  // --- Justice ---
+  {
+    id: 31,
+    name: "Angel",
+    arcana: "Justice",
+    level: 4,
+    type: "Light",
+    weak: ["Dark", "Elec"],
+    null: ["Light"],
+    skills: ["Kouha", "Dia", "Patra"]
+  },
+  {
+    id: 32,
+    name: "Archangel",
+    arcana: "Justice",
+    level: 10,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hama", "Double Slash", "Sukukaja"]
+  },
+  {
+    id: 33,
+    name: "Principality",
+    arcana: "Justice",
+    level: 18,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hamaon", "Mahama", "Mediarama"]
+  },
+  {
+    id: 34,
+    name: "Melchizedek",
+    arcana: "Justice",
+    level: 55,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hamaon", "Mahamaon", "God's Hand"]
+  },
+
+  // --- Hermit ---
+  {
+    id: 35,
+    name: "Mothman",
+    arcana: "Hermit",
+    level: 24,
+    type: "Elec",
+    weak: ["Wind"],
+    null: ["Elec"],
+    skills: ["Zionga", "Mazionga", "Skull Cracker"]
+  },
+  {
+    id: 36,
+    name: "Arahabaki",
+    arcana: "Hermit",
+    level: 28,
+    type: "Fire",
+    weak: ["Elec", "Light", "Dark"],
+    null: ["Slash", "Strike", "Pierce"],
+    skills: ["Agilao", "Marakunda", "Poison Mist"]
+  },
+  {
+    id: 37,
+    name: "Nebiros",
+    arcana: "Hermit",
+    level: 47,
+    type: "Dark",
+    weak: ["Light"],
+    null: ["Dark"],
+    skills: ["Mudoon", "Mamudoon", "Marin Karin"]
+  },
+
+  // --- Fortune ---
+  {
+    id: 38,
+    name: "Fortuna",
+    arcana: "Fortune",
+    level: 17,
+    type: "Wind",
+    weak: ["Elec"],
+    null: ["Wind"],
+    skills: ["Garula", "Rakukaja", "Dodge Elec"]
+  },
+  {
+    id: 39,
+    name: "Norn",
+    arcana: "Fortune",
+    level: 62,
+    type: "Wind",
+    weak: ["Elec"],
+    null: ["Wind", "Light"],
+    skills: ["Garudyne", "Magarudyne", "Wind Amp"]
+  },
+
+  // --- Strength ---
+  {
+    id: 40,
+    name: "Valkyrie",
+    arcana: "Strength",
+    level: 12,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hama", "Double Slash", "Counter"]
+  },
+  {
+    id: 41,
+    name: "Titan",
+    arcana: "Strength",
+    level: 26,
+    type: "Fire",
+    weak: ["Ice"],
+    skills: ["Agilao", "Kill Rush", "Counter"]
+  },
+  {
+    id: 42,
+    name: "Siegfried",
+    arcana: "Strength",
+    level: 60,
+    type: "Ice",
+    weak: ["Dark"],
+    null: ["Ice", "Light"],
+    skills: ["Brave Blade", "Vorpal Blade", "High Counter"]
+  },
+
+  // --- Hanged Man ---
+  {
+    id: 43,
+    name: "Inugami",
+    arcana: "Hanged Man",
+    level: 10,
+    type: "Fire",
+    weak: ["Wind"],
+    null: ["Fire", "Dark"],
+    skills: ["Agi", "Mudo", "Poison Mist"]
+  },
+  {
+    id: 44,
     name: "Take-Minakata",
     arcana: "Hanged Man",
     level: 21,
     type: "Elec",
-    weak: ["Dark"]
+    weak: ["Wind"],
+    null: ["Elec"],
+    skills: ["Zionga", "Mazionga", "Elec Boost"]
   },
   {
-    id: 9,
+    id: 45,
+    name: "Attis",
+    arcana: "Hanged Man",
+    level: 67,
+    type: "Fire",
+    weak: ["Dark"],
+    null: ["Fire", "Light"],
+    skills: ["Agidyne", "Samarecarm", "Enduring Soul"]
+  },
+
+  // --- Death ---
+  {
+    id: 46,
+    name: "Ghoul",
+    arcana: "Death",
+    level: 9,
+    type: "Dark",
+    weak: ["Fire", "Light"],
+    null: ["Dark"],
+    skills: ["Mudo", "Poisma", "Evil Touch"]
+  },
+  {
+    id: 47,
+    name: "Pale Rider",
+    arcana: "Death",
+    level: 34,
+    type: "Dark",
+    weak: ["Light"],
+    null: ["Dark"],
+    skills: ["Mudoon", "Mamudo", "Megidola"]
+  },
+  {
+    id: 48,
     name: "Thanatos",
     arcana: "Death",
-    level: 64,
+    level: 65,
     type: "Dark",
-    weak: ["Light"]
+    weak: [],
+    null: ["Dark", "Light"],
+    skills: ["Mamudoon", "Die For Me!", "Megidolaon"]
+  },
+
+  // --- Temperance ---
+  {
+    id: 49,
+    name: "Nigi Mitama",
+    arcana: "Temperance",
+    level: 7,
+    type: "Light",
+    weak: ["Dark"],
+    skills: ["Kouha", "Media", "Makajam"]
   },
   {
-    id: 10,
+    id: 50,
+    name: "Mithra",
+    arcana: "Temperance",
+    level: 24,
+    type: "Light",
+    weak: ["Dark"],
+    null: ["Light"],
+    skills: ["Hamaon", "Mahama", "Dekunda"]
+  },
+
+  // --- Devil ---
+  {
+    id: 51,
+    name: "Lilim",
+    arcana: "Devil",
+    level: 8,
+    type: "Dark",
+    weak: ["Wind", "Light"],
+    null: ["Dark"],
+    skills: ["Mudo", "Agi", "Marin Karin"]
+  },
+  {
+    id: 52,
+    name: "Incubus",
+    arcana: "Devil",
+    level: 15,
+    type: "Dark",
+    weak: ["Light", "Elec"],
+    null: ["Dark"],
+    skills: ["Evil Touch", "Life Drain", "Mudo"]
+  },
+  {
+    id: 53,
+    name: "Beelzebub",
+    arcana: "Devil",
+    level: 81,
+    type: "Dark",
+    weak: [],
+    null: ["Fire", "Dark"],
+    skills: ["Mamudoon", "Megidolaon", "Old One"]
+  },
+
+  // --- Tower ---
+  {
+    id: 54,
+    name: "Cu Chulainn",
+    arcana: "Tower",
+    level: 46,
+    type: "Wind",
+    weak: [],
+    null: ["Wind", "Light"],
+    skills: ["Garudyne", "Vorpal Blade", "Matarukaja"]
+  },
+  {
+    id: 55,
+    name: "Mara",
+    arcana: "Tower",
+    level: 62,
+    type: "Fire",
+    weak: ["Ice"],
+    null: ["Fire", "Dark"],
+    skills: ["Maragidyne", "Agidyne", "Fire Amp"]
+  },
+
+  // --- Star ---
+  {
+    id: 56,
+    name: "Neko Shogun",
+    arcana: "Star",
+    level: 32,
+    type: "Elec",
+    weak: ["Wind"],
+    null: ["Elec", "Light"],
+    skills: ["Zionga", "Mazionga", "Elec Boost"]
+  },
+  {
+    id: 57,
+    name: "Helel",
+    arcana: "Star",
+    level: 88,
+    type: "Almighty",
+    weak: [],
+    null: ["Fire", "Light", "Dark"],
+    skills: ["Morning Star", "Megidolaon", "God's Hand"]
+  },
+
+  // --- Moon ---
+  {
+    id: 58,
+    name: "Gurr",
+    arcana: "Moon",
+    level: 20,
+    type: "Wind",
+    weak: ["Elec"],
+    null: ["Wind"],
+    skills: ["Garula", "Magarula", "Wind Boost"]
+  },
+  {
+    id: 59,
+    name: "Sandalphon",
+    arcana: "Moon",
+    level: 71,
+    type: "Light",
+    weak: [],
+    null: ["Light", "Dark"],
+    skills: ["Mahamaon", "Hamaon", "Amrita Shower"]
+  },
+
+  // --- Sun ---
+  {
+    id: 60,
+    name: "Yatagarasu",
+    arcana: "Sun",
+    level: 33,
+    type: "Fire",
+    weak: ["Ice"],
+    null: ["Fire", "Light"],
+    skills: ["Agilao", "Hamaon", "Dekunda"]
+  },
+  {
+    id: 61,
+    name: "Asura",
+    arcana: "Sun",
+    level: 78,
+    type: "Fire",
+    weak: [],
+    null: ["Fire", "Light", "Dark"],
+    skills: ["Agidyne", "Maragidyne", "God's Hand"]
+  },
+
+  // --- Judgment ---
+  {
+    id: 62,
     name: "Messiah",
     arcana: "Judgment",
     level: 90,
     type: "Almighty",
-    weak: ["Dark"]
-  }
+    weak: [],
+    null: ["Light", "Dark"],
+    skills: ["Megidolaon", "God's Hand", "Salvation"]
+  },
+  {
+    id: 63,
+    name: "Michael",
+    arcana: "Judgment",
+    level: 72,
+    type: "Light",
+    weak: [],
+    null: ["Light", "Dark"],
+    skills: ["Mahamaon", "Heaven's Blade", "Debilitate"]
+  },
+
+  // --- Aeon ---
+  {
+    id: 64,
+    name: "Uriel",
+    arcana: "Aeon",
+    level: 62,
+    type: "Fire",
+    weak: [],
+    null: ["Fire", "Light"],
+    skills: ["Maragidyne", "God's Hand", "Spell Master"]
+  },
+
+  // --- Star (extra) ---
+  {
+    id: 65,
+    name: "Saturnus",
+    arcana: "Star",
+    level: 52,
+    type: "Fire",
+    weak: ["Ice"],
+    null: ["Fire"],
+    skills: ["Agidyne", "Maragion", "Fire Amp"]
+  },
 ];
