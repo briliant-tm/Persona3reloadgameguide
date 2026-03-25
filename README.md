@@ -28,6 +28,9 @@ Originally created as a guide for Persona 3 Reload—now available as an open-so
 The **official, maintained website** is available at:
 - **Production URL:** [https://lzcorporation-p3r.vercel.app](https://lzcorporation-p3r.vercel.app)
 
+## Donate
+[Saweria](https://saweria.co/AviL)
+
 This is the authoritative source for the Persona 3 Reload game guide.
 
 ---
